@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { cn } from '/@lib/utils';
+import { cn } from "@/lib/utils";
 
 import "./globals.css";
+
 
 const fontSans = Plus_Jakarta_Sans({ 
   subsets: ["latin"],
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn}>{children}</body>
+      <body className={cn(), fontSans.className}>{children}</body>
     </html>
   );
 }
