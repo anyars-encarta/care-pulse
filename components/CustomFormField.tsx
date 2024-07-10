@@ -1,9 +1,6 @@
-"use client"
-
+import { E164Number } from "libphonenumber-js/core";
 import {
-    Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -41,7 +38,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             return (
                 <div className='flex rounded-md border border-dark-500 bg-dark-400'>
                     {iconSrc && (
-                        <Image src={iconSrc}
+                        <Image
+                            src={iconSrc}
                             width={24}
                             height={24}
                             alt={iconAlt || 'icon'}
