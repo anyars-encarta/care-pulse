@@ -11,6 +11,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
 import { FormFieldType } from "./PatientForm";
+import { RadioGroup } from "../ui/radio-group";
 
 const RegisterForm = ({ user }: { user: User }) => {
     const router = useRouter();
@@ -100,7 +101,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         renderSkeleton={(field) => (
                             <FormControl>
                                 <RadioGroup>
-                                    
+
                                 </RadioGroup>
                             </FormControl>
                         )}
