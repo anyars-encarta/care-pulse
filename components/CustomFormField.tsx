@@ -13,6 +13,8 @@ import Image from "next/image";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input';
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface CustomProps {
     control: Control<any>,
@@ -85,7 +87,10 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                     />
 
                     <FormControl>
-                        
+                        <DatePicker
+                            selected={field.Value}
+                            onChange={(date) => field.onChange(date)}
+                        />
                     </FormControl>
                 </div>
             )
