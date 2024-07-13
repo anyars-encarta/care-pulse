@@ -79,6 +79,29 @@ export const Doctors = [
   },
 ];
 
+export const InsuranceProviders = [
+    {
+        name: 'National Health Insurance Scheme',
+        logo: '/assets/images/nhis.png',
+    },
+    {
+        name: 'Activa Insurance',
+        logo: '/assets/images/activa.png',
+    },
+    {
+        name: 'Premier Health Insurance',
+        logo: '/assets/images/premier.jpg',
+    },
+    {
+        name: 'Acacia Health Insurance',
+        logo: '/assets/images/acacia.png',
+    },
+    {
+        name: 'GLICO Healthcare',
+        logo: '/assets/images/glico.jpg',
+    },
+];
+
 export const StatusIcon = {
   scheduled: "/assets/icons/check.svg",
   pending: "/assets/icons/pending.svg",

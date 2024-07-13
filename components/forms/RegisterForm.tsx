@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
 import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Doctors, GenderOptions } from "@/constants";
+import { Doctors, GenderOptions, InsuranceProviders } from "@/constants";
 import { Label } from "../ui/label";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
@@ -188,7 +188,41 @@ const RegisterForm = ({ user }: { user: User }) => {
                 </CustomFormField>
 
                 <div className='flex flex-col gap-6 xl:flex-row'>
+                    {/* <CustomFormField
+                        fieldType={FormFieldType.INPUT}
+                        control={form.control}
+                        name='insuranceProvider'
+                        label='Insurance Provider'
+                        placeholder='NHIS'
+                    /> */}
+                    <CustomFormField
+                        fieldType={FormFieldType.SELECT}
+                        control={form.control}
+                        name='insuranceProvider'
+                        label='Insurance Provider'
+                        placeholder='Select insurance provider'
+                    >
+                        {InsuranceProviders.map((provider) => (
+                            <SelectItem key={provider.name} value={provider.name}>
+                                <div className='flex cursor-pointer items-center gap-2'>
+                                    <Image
+                                        src={provider.logo} width={32} height={32} alt={provider.name}
+                                        className='rounded-full border border-dark-500'
+                                    />
 
+                                    <p>{provider.name}</p>
+                                </div>
+                            </SelectItem>
+                        ))}
+                    </CustomFormField>
+
+                    <CustomFormField
+                        fieldType={FormFieldType.INPUT}
+                        control={form.control}
+                        name='insurancePolicyNumber'
+                        label='Insurance Policy Number'
+                        placeholder='1234567890'
+                    />
                 </div>
                 <div className='flex flex-col gap-6 xl:flex-row'>
 
