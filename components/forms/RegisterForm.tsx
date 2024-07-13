@@ -120,6 +120,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         )}
                     />
                 </div>
+
                 <div className='flex flex-col gap-6 xl:flex-row'>
 
                 </div>

@@ -32,7 +32,7 @@ interface CustomProps {
 };
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-    const { fieldType, iconSrc, iconAlt, placeholder, showTimeSelect, dateFormat } = props;
+    const { fieldType, iconSrc, iconAlt, placeholder, showTimeSelect, dateFormat, renderSkeleton } = props;
     const [value, setValue] = useState();
 
     switch (fieldType) {
@@ -100,11 +100,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             )
 
         case FormFieldType.SKELETON:
-            return (
-                <div>
-
-                </div>
-            )
+            return renderSkeleton ? renderSkeleton(field) : null
         default:
             break;
     }
