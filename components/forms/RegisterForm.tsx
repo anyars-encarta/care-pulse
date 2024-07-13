@@ -177,7 +177,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         <SelectItem key={doctor.name} value={doctor.name}>
                             <div className='flex cursor-pointer items-center gap-2'>
                                 <Image
-                                    src={doctor.image} width={32} height={32} alr={doctor.name}
+                                    src={doctor.image} width={32} height={32} alt={doctor.name}
                                     className='rounded-full border border-dark-500'
                                 />
 
