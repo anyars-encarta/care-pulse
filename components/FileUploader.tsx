@@ -1,9 +1,30 @@
-import React from 'react'
+'use client'
 
-const FileUploader = () => {
-  return (
-    <div>FileUploader</div>
-  )
-}
+import React, { useCallback } from 'react'
+import { useDropzone } from 'react-dropzone'
 
-export default FileUploader
+type FileUploaderProps = {
+    files: File[] | undefined,
+    onChange: (files: File[]) => void;
+};
+
+const FileUploader = ({ files, onChange }: FileUploaderProps) => {
+    const onDrop = useCallback((acceptedFiles: File[]) => {
+        onChange(acceptedFiles)
+    }, [])
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+    return (
+        <div {...getRootProps()} className='file-upload'>
+            <input {...getInputProps()} />
+            {
+                isDragActive ?
+                    <p>Drop the files here ...</p> :
+                    <p>Drag 'n' drop some files here, or click to select files</p>
+            }
+        </div>
+    )
+};
+
+export default FileUploader;
