@@ -60,6 +60,17 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                 </div>
             )
 
+        case FormFieldType.TEXTAREA:
+            return (
+                <FormControl>
+                    <Textarea
+                        placeholder={placeholder}
+                        {...field}
+                        className='shad-input'
+                    />
+                </FormControl>
+            )
+            
         case FormFieldType.PHONE_INPUT:
             return (
                 <FormControl>
