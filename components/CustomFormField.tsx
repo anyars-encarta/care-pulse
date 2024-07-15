@@ -13,7 +13,7 @@ import Image from "next/image";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input';
 import { useState } from "react";
-import DatePicker from "react-datepicker";
+import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
 import { Textarea } from "./ui/textarea";
@@ -103,11 +103,12 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                     />
 
                     <FormControl>
-                        <DatePicker
-                            selected={field.Value}
+                        <ReactDatePicker
+                            selected={field.value}
                             onChange={(date) => field.onChange(date)}
-                            dateFormat={dateFormat ?? 'mm/dd/yyyy'}
+                            dateFormat={dateFormat ?? "MM/dd/yyyy"}
                             showTimeSelect={showTimeSelect ?? false}
+                            showYearDropdown
                             timeInputLabel='Time:'
                             wrapperClassName='date-picker'
                         />
@@ -165,7 +166,7 @@ const CustomFormField = (props: CustomProps) => {
             render={({ field }) => (
                 <FormItem className='flex-1'>
                     {fieldType !== FormFieldType.CHECKBOX && label && (
-                        <FormLabel>{label}</FormLabel>
+                        <FormLabel className='shad-input-label'>{label}</FormLabel>
                     )}
 
                     <RenderField field={field} props={props} />
