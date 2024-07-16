@@ -1,6 +1,9 @@
-import { ID, Query, InputFile } from "node-appwrite"
+'use server'
+
+import { ID, Query } from "node-appwrite"
 import { BUCKET_ID, DATABASE_ID, databases, ENDPOINT, PATIENT_COLLECTION_ID, PROJECT_ID, storage, users } from "../appwrite.config"
 import { parseStringify } from "../utils";
+import { InputFile } from 'node-appwrite/file';
 
 export const createUser = async (user: CreateUserParams) => {
     try {
@@ -48,6 +51,12 @@ export const registerPatient = async ({ identificationDocument, ...patient}: Reg
 
             file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile)
         }
+
+        console.log({
+            identificationDocumentId: file?.$id || null,
+            identificationDocumentUrl: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
+            ...patient
+        })
 
         const newPatient = await databases.createDocument(
             DATABASE_ID!, 
