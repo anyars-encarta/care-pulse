@@ -2,9 +2,9 @@ import Image from 'next/image'
 import { Button } from './ui/button'
 
 interface ButtonProps {
-    isLoading: boolean,
-    className?: string,
-    children: React.ReactNode,
+    isLoading: boolean;
+    className?: string;
+    children: React.ReactNode;
 }
 
 const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
@@ -21,7 +21,9 @@ const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
                     />
                     Loading...
                 </div>
-        ) : children}
+            ) : (
+                children
+            )}
         </Button>
     )
 }
