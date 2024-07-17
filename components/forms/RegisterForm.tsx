@@ -29,13 +29,14 @@ const RegisterForm = ({ user }: { user: User }) => {
         resolver: zodResolver(PatientFormValidation),
         defaultValues: {
             ...PatientFormDefaultValues,
-            name: "",
-            email: "",
-            phone: "",
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
         },
     });
 
     const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
+        console.log('Started')
         setIsLoading(true);
 
         let formData;
@@ -46,7 +47,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             })
 
             formData = new FormData();
-
+            console.log('Form Data: ', formData)
             formData.append('blobFile', blobFile);
             formData.append('fileName', values.identificationDocument[0].name);
         }
@@ -56,13 +57,15 @@ const RegisterForm = ({ user }: { user: User }) => {
                 ...values,
                 userId: user.$id,
                 birthDate: new Date(values.birthDate),
-                identificationDocument: formData,
+                identificationDocument: values.identificationDocument
+                    ? formData
+                    : undefined,
             }
 
             // @ts-ignore
             const patient = await registerPatient(patientData);
 
-            if (patient) router.push(`/patients/${user.$id}/new-appointment`)
+            if (patient) {router.push(`/patients/${user.$id}/new-appointment`)}
         } catch (e) {
             console.log(e);
         }
@@ -99,7 +102,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         fieldType={FormFieldType.INPUT}
                         control={form.control}
                         name='email'
-                        label='Email'
+                        label='Email Address'
                         placeholder='john@something.com'
                         iconSrc='/assets/icons/email.svg'
                         iconAlt='email'
@@ -134,8 +137,8 @@ const RegisterForm = ({ user }: { user: User }) => {
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
                                 >
-                                    {GenderOptions.map((option) => (
-                                        <div key={option} className='radio-group'>
+                                    {GenderOptions.map((option, i) => (
+                                        <div key={option + i} className='radio-group'>
                                             <RadioGroupItem value={option} id={option} />
                                             <Label htmlFor={option} className='cursor-pointer'>
                                                 {option}
@@ -198,8 +201,8 @@ const RegisterForm = ({ user }: { user: User }) => {
                     label='Primary Physician'
                     placeholder='select a Physician'
                 >
-                    {Doctors.map((doctor) => (
-                        <SelectItem key={doctor.name} value={doctor.name}>
+                    {Doctors.map((doctor, i) => (
+                        <SelectItem key={doctor.name + i} value={doctor.name}>
                             <div className='flex cursor-pointer items-center gap-2'>
                                 <Image
                                     src={doctor.image} width={32} height={32} alt={doctor.name}
@@ -227,8 +230,8 @@ const RegisterForm = ({ user }: { user: User }) => {
                         label='Insurance Provider'
                         placeholder='Select insurance provider'
                     >
-                        {InsuranceProviders.map((provider) => (
-                            <SelectItem key={provider.name} value={provider.name}>
+                        {InsuranceProviders.map((provider, i) => (
+                            <SelectItem key={provider.name + i} value={provider.name}>
                                 <div className='flex cursor-pointer items-center gap-2'>
                                     <Image
                                         src={provider.logo} width={32} height={32} alt={provider.name}
@@ -297,8 +300,8 @@ const RegisterForm = ({ user }: { user: User }) => {
                     label='Identification Type'
                     placeholder='select an Identification Type'
                 >
-                    {IdentificationTypes.map((type) => (
-                        <SelectItem key={type} value={type}>
+                    {IdentificationTypes.map((type, i) => (
+                        <SelectItem key={type + i} value={type}>
                             {type}
                         </SelectItem>
                     ))}
