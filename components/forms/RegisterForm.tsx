@@ -42,7 +42,6 @@ const RegisterForm = ({ user }: { user: User }) => {
     });
 
     const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
-        console.log('Started')
         setIsLoading(true);
 
         let formData;
@@ -56,7 +55,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             });
 
             formData = new FormData();
-            console.log('Form Data: ', formData)
+
             formData.append("blobFile", blobFile);
             formData.append("fileName", values.identificationDocument[0].name);
         }
@@ -232,13 +231,6 @@ const RegisterForm = ({ user }: { user: User }) => {
                     </CustomFormField>
 
                     <div className='flex flex-col gap-6 xl:flex-row'>
-                        {/* <CustomFormField
-                        fieldType={FormFieldType.INPUT}
-                        control={form.control}
-                        name='insuranceProvider'
-                        label='Insurance Provider'
-                        placeholder='NHIS'
-                    /> */}
                         <CustomFormField
                             fieldType={FormFieldType.SELECT}
                             control={form.control}
