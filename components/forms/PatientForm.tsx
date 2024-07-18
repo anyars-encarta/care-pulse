@@ -12,6 +12,7 @@ import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
+import { FormFieldType } from '../../components/CustomFormField';
 
 const PatientForm = () => {
     const router = useRouter();
