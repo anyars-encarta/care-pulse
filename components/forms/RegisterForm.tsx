@@ -195,8 +195,8 @@ const RegisterForm = ({ user }: { user: User }) => {
                         <CustomFormField
                             fieldType={FormFieldType.PHONE_INPUT}
                             control={form.control}
-                            name='emergencyPhoneNumber'
-                            label='Emergency Phone Number'
+                            name='emergencyContactNumber'
+                            label='Emergency Cotact Number'
                             placeholder='+233 12 345 6789'
                         />
                     </div>
@@ -369,7 +369,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                     <CustomFormField
                         fieldType={FormFieldType.CHECKBOX}
                         control={form.control}
-                        name='policyConsent'
+                        name='privacyConsent'
                         label='I acknowledge that I have reviewed and agree to the privacy policy.'
                     />
                 </section>
