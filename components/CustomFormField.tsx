@@ -125,19 +125,31 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 
         case FormFieldType.SELECT:
             return (
-                <FormControl>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                            <SelectTrigger className='shad-select-trigger'>
-                                <SelectValue placeholder={props.placeholder} />
-                            </SelectTrigger>
-                        </FormControl>
+                <div className='flex rounded-md border border-dark-500 bg-dark-400'>
+                    {props.iconSrc && (
+                        <Image
+                            src={props.iconSrc}
+                            width={24}
+                            height={24}
+                            alt={props.iconAlt || 'icon'}
+                            className='ml-2'
+                        />
+                    )}
 
-                        <SelectContent className='shad-select-content'>
-                            {props.children}
-                        </SelectContent>
-                    </Select>
-                </FormControl>
+                    <FormControl>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                                <SelectTrigger className='shad-select-trigger'>
+                                    <SelectValue placeholder={props.placeholder} />
+                                </SelectTrigger>
+                            </FormControl>
+
+                            <SelectContent className='shad-select-content'>
+                                {props.children}
+                            </SelectContent>
+                        </Select>
+                    </FormControl>
+                </div>
             )
 
         case FormFieldType.CHECKBOX:

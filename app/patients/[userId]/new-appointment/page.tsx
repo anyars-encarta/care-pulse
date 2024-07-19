@@ -1,9 +1,12 @@
 import AppointmentForm from "@/components/forms/AppointmentForm";
 import PatientForm from "@/components/forms/PatientForm";
+import { getPatient } from "@/lib/actions/patient.actions";
 import Image from "next/image";
 import Link from "next/link";
 
-const NewAppointment = () => {
+const NewAppointment = async ({ params: { userId }}: SearchParamProps) => {
+    const patient = await getPatient(userId);
+
     return (
         <div className='flex h-screen max-h-screen'>
             <section className='remove-scrollbar container my-auto'>
@@ -16,9 +19,13 @@ const NewAppointment = () => {
                         className='mb-12 h-10 w-fit'
                     />
 
-                    <AppointmentForm />
+                    <AppointmentForm 
+                    type='create' 
+                    userId={userId}
+                    patientId={patient.$id}
+                    />
                     
-                    <p className='justify-end text-dark-600 xl:text-left'>
+                    <p className='copyright mt-10 py-12'>
                         © 2024 CarePulse
                     </p>
                 </div>

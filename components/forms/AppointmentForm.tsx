@@ -13,8 +13,17 @@ import { useState } from "react"
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
 import { FormFieldType } from '../../components/CustomFormField';
+import { Doctors } from "@/constants";
+import { SelectItem } from "../ui/select";
+import Image from "next/image";
 
-const AppointmentForm = () => {
+const AppointmentForm = ({
+    type, userId, patientId
+}: {
+    userId: string;
+    patientId: string;
+    type: 'create' | 'cancel' | 'schedule';
+}) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -36,49 +45,107 @@ const AppointmentForm = () => {
             const user = await createUser(userData);
 
             if (user) router.push(`/patients/${user.$id}/register`)
-                
+
         } catch (e) {
             console.log(e);
         }
+    }
+
+    let buttonLabel;
+
+    switch (type) {
+        case 'cancel':
+            buttonLabel = 'Cancel Appointment';
+            break;
+
+        case 'create':
+            buttonLabel = 'Submit and Continue';
+            break;
+
+        case 'schedule':
+            buttonLabel = 'Schedule Appointment';
+            break;
+        default:
+            break;
     }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
                 <section className='mb-12 space-y-4'>
-                    <h1 className='header'>Hi there 👋</h1>
-                    <p className='text-dark-700'>Schedule your first appointment</p>
+                    <h1 className='header'>New Appointment</h1>
+                    <p className='text-dark-700'>Request a new appointment in 10 seconds</p>
                 </section>
 
-                <CustomFormField
-                    fieldType={FormFieldType.INPUT}
-                    control={form.control}
-                    name='name'
-                    label='Full Name'
-                    placeholder='John Doe'
-                    iconSrc='/assets/icons/user.svg'
-                    iconAlt='user'
-                />
+                {type !== 'cancel' && (
+                    <>
+                        <CustomFormField
+                            fieldType={FormFieldType.SELECT}
+                            control={form.control}
+                            name='primaryPhysician'
+                            label='Doctor'
+                            placeholder='select a doctor'
+                            iconSrc='/assets/icons/user.svg'
+                            iconAlt='user'
+                        >
+                            {Doctors.map((doctor, i) => (
+                                <SelectItem key={doctor.name + i} value={doctor.name}>
+                                    <div className='flex cursor-pointer items-center gap-2'>
+                                        <Image
+                                            src={doctor.image}
+                                            width={32}
+                                            height={32}
+                                            alt={doctor.name}
+                                            className='rounded-full border border-dark-500'
+                                        />
 
-                <CustomFormField
-                    fieldType={FormFieldType.INPUT}
-                    control={form.control}
-                    name='email'
-                    label='Email'
-                    placeholder='john@something.com'
-                    iconSrc='/assets/icons/email.svg'
-                    iconAlt='email'
-                />
+                                        <p>{doctor.name}</p>
+                                    </div>
+                                </SelectItem>
+                            ))}
+                        </CustomFormField>
 
-                <CustomFormField
-                    fieldType={FormFieldType.PHONE_INPUT}
-                    control={form.control}
-                    name='phone'
-                    label='Phone Number'
-                    placeholder='+233 12 345 6789'
-                />
+                        <div className='flex flex-col gap-6 xl:flex-row'>
+                            <CustomFormField
+                                fieldType={FormFieldType.TEXTAREA}
+                                control={form.control}
+                                name='reason'
+                                label='Reason for Appointment'
+                                placeholder='ex: Annual monthly check-up'
+                            />
 
-                <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+                            <CustomFormField
+                                fieldType={FormFieldType.TEXTAREA}
+                                control={form.control}
+                                name='notes'
+                                label='Additional comments/notes'
+                                placeholder='ex: Prefer afternoon appointments, if possible'
+                            />
+                        </div>
+
+                        <CustomFormField
+                            fieldType={FormFieldType.DATE_PICKER}
+                            control={form.control}
+                            name='schedule'
+                            label='Expected appointment date'
+                            showTimeSelect
+                            dateFormat='MM/dd/yyyy - h:mm aa'
+                        />
+                    </>
+                )}
+
+                {type === 'cancel' && (
+                    <CustomFormField
+                        fieldType={FormFieldType.TEXTAREA}
+                        control={form.control}
+                        name='notes'
+                        label='Reason for cancelation'
+                        placeholder='ex: Decided not to book the appointment'
+                    />
+                )}
+
+
+                <SubmitButton isLoading={isLoading} className={`${type === 'cancel' ? 'shad-danger-btn' : 'shad-primary-btn'} w-full`}>{buttonLabel}</SubmitButton>
             </form>
         </Form>
     )
