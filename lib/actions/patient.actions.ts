@@ -8,15 +8,15 @@ import { InputFile } from 'node-appwrite/file';
 export const createUser = async (user: CreateUserParams) => {
     try {
         const newUser = await users.create(
-            ID.unique(), 
+            ID.unique(),
             user.email,
             user.phone,
-            undefined, 
+            undefined,
             user.name,
         )
-    
+
         return parseStringify(newUser);
-        
+
     } catch (e: any) {
         if (e && e?.code === 409) {
             const existingUser = await users.list([
@@ -29,21 +29,21 @@ export const createUser = async (user: CreateUserParams) => {
     }
 };
 
-export const getUser = async(userId: string) => {
+export const getUser = async (userId: string) => {
     try {
         const user = await users.get(userId);
 
-        return(parseStringify(user))
+        return (parseStringify(user))
     } catch (e) {
         console.error(e)
     }
 };
 
-export const registerPatient = async ({ identificationDocument, ...patient}: RegisterUserParams) => {
+export const registerPatient = async ({ identificationDocument, ...patient }: RegisterUserParams) => {
     try {
         let file;
 
-        if(identificationDocument) {
+        if (identificationDocument) {
             const inputFile = InputFile.fromBuffer(
                 identificationDocument?.get('blobFile') as Blob,
                 identificationDocument?.get('fileName') as string,
@@ -53,7 +53,7 @@ export const registerPatient = async ({ identificationDocument, ...patient}: Reg
         }
 
         const newPatient = await databases.createDocument(
-            DATABASE_ID!, 
+            DATABASE_ID!,
             PATIENT_COLLECTION_ID!,
             ID.unique(),
             {
@@ -69,7 +69,7 @@ export const registerPatient = async ({ identificationDocument, ...patient}: Reg
     }
 }
 
-export const getPatient = async(userId: string) => {
+export const getPatient = async (userId: string) => {
     try {
         const patients = await databases.listDocuments(
             DATABASE_ID!,
@@ -77,7 +77,7 @@ export const getPatient = async(userId: string) => {
             [Query.equal('userId', userId)]
         );
 
-        return(parseStringify(patients.documents[0]))
+        return (parseStringify(patients.documents[0]))
     } catch (e) {
         console.error(e)
     }

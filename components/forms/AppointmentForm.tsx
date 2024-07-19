@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { UserFormValidation } from "@/lib/validation";
+import { getAppointmentSchema } from "@/lib/validation";
 import "react-phone-number-input/style.css";
 
 import { Form } from "@/components/ui/form";
@@ -11,11 +11,11 @@ import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import { useRouter } from "next/navigation";
-import { createUser } from "@/lib/actions/patient.actions";
 import { FormFieldType } from '../../components/CustomFormField';
 import { Doctors } from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
+import { createAppointment } from "@/lib/actions/appointment.actions";
 
 const AppointmentForm = ({
     type, userId, patientId
@@ -27,24 +27,58 @@ const AppointmentForm = ({
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
-    const form = useForm<z.infer<typeof UserFormValidation>>({
-        resolver: zodResolver(UserFormValidation),
+    const AppointmentFormValidation = getAppointmentSchema(type);
+
+    const form = useForm<z.infer<typeof AppointmentFormValidation>>({
+        resolver: zodResolver(AppointmentFormValidation),
         defaultValues: {
-            name: "",
-            email: "",
-            phone: "",
+            primaryPhysician: "",
+            schedule: new Date(),
+            reason: "",
+            note: "",
+            cancellationReason: ""
         },
     });
 
-    const onSubmit = async ({ name, email, phone }: z.infer<typeof UserFormValidation>) => {
+    const onSubmit = async (values: z.infer<typeof AppointmentFormValidation>) => {
         setIsLoading(true);
 
+        let status;
+
+        switch (type) {
+            case 'schedule':
+                status = 'Scheduled';
+                break;
+
+            case 'cancel':
+                status = 'Cancelled';
+                break;
+
+
+            default:
+                status = 'Pending'
+                break;
+        }
+
         try {
-            const userData = { name, email, phone };
+            if (type === 'create' && patientId) {
+                const appointmentData = {
+                    userId,
+                    patient: patientId,
+                    primaryPhysician: values.primaryPhysician,
+                    schedule: new Date(values.schedule),
+                    reason: values.reason!,
+                    note: values.note,
+                    status: status as Status,
+                }
 
-            const user = await createUser(userData);
+                const appointment = await createAppointment(appointmentData);
 
-            if (user) router.push(`/patients/${user.$id}/register`)
+                if (appointment) {
+                    form.reset();
+                    router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`);
+                }
+            }
 
         } catch (e) {
             console.log(e);
