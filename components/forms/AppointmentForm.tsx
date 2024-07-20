@@ -47,16 +47,16 @@ const AppointmentForm = ({
 
         switch (type) {
             case 'schedule':
-                status = 'Scheduled';
+                status = 'scheduled';
                 break;
 
             case 'cancel':
-                status = 'Cancelled';
+                status = 'cancelled';
                 break;
 
 
             default:
-                status = 'Pending'
+                status = 'pending'
                 break;
         }
 
@@ -160,7 +160,7 @@ const AppointmentForm = ({
                             <CustomFormField
                                 fieldType={FormFieldType.TEXTAREA}
                                 control={form.control}
-                                name='notes'
+                                name='note'
                                 label='Additional comments/notes'
                                 placeholder='ex: Prefer afternoon appointments, if possible'
                             />
@@ -173,7 +173,7 @@ const AppointmentForm = ({
                     <CustomFormField
                         fieldType={FormFieldType.TEXTAREA}
                         control={form.control}
-                        name='notes'
+                        name='cancellationReason'
                         label='Reason for cancelation'
                         placeholder='ex: Decided not to book the appointment'
                     />
