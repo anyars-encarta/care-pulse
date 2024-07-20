@@ -55,3 +55,10 @@ declare type SearchParamProps = {
     appointment: Appointment;
     type: string;
   };
+
+  declare type StatCardProps = {
+    type: 'appointments' | 'pending' | 'cancelled'
+    count: number
+    label: string
+    icon: string
+};

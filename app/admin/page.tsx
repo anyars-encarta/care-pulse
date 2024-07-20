@@ -1,3 +1,4 @@
+import StatCard from '@/components/StatCard'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -18,6 +19,36 @@ const Admin = () => {
 
                 <p className='text-16-semibold'>Admin Dashboard</p>
             </header>
+
+            <main className='admin-main'>
+                <section className='w-full space-y-4'>
+                    <h1 className='header'>Welcome, Admin 👋</h1>
+                    <p className='text-dark-700'>Start the day with managing new appointments</p>
+                </section>
+
+                <section className='admin-stat'>
+                    <StatCard
+                        type='appointments'
+                        count={5}
+                        label='Scgeduled Appointments'
+                        icon='/assets/icons/appointments.svg'
+                    />
+
+                    <StatCard
+                        type='pending'
+                        count={10}
+                        label='Pending Appointments'
+                        icon='/assets/icons/pending.svg'
+                    />
+
+                    <StatCard
+                        type='cancelled'
+                        count={2}
+                        label='Cancelled Appointments'
+                        icon='/assets/icons/cancelled.svg'
+                    />
+                </section>
+            </main>
         </div>
     )
 }
