@@ -139,6 +139,15 @@ const AppointmentForm = ({
                             ))}
                         </CustomFormField>
 
+                        <CustomFormField
+                            fieldType={FormFieldType.DATE_PICKER}
+                            control={form.control}
+                            name='schedule'
+                            label='Expected appointment date'
+                            showTimeSelect
+                            dateFormat='MM/dd/yyyy - h:mm aa'
+                        />
+
                         <div className='flex flex-col gap-6 xl:flex-row'>
                             <CustomFormField
                                 fieldType={FormFieldType.TEXTAREA}
@@ -157,14 +166,6 @@ const AppointmentForm = ({
                             />
                         </div>
 
-                        <CustomFormField
-                            fieldType={FormFieldType.DATE_PICKER}
-                            control={form.control}
-                            name='schedule'
-                            label='Expected appointment date'
-                            showTimeSelect
-                            dateFormat='MM/dd/yyyy - h:mm aa'
-                        />
                     </>
                 )}
 
@@ -177,7 +178,6 @@ const AppointmentForm = ({
                         placeholder='ex: Decided not to book the appointment'
                     />
                 )}
-
 
                 <SubmitButton isLoading={isLoading} className={`${type === 'cancel' ? 'shad-danger-btn' : 'shad-primary-btn'} w-full`}>{buttonLabel}</SubmitButton>
             </form>
