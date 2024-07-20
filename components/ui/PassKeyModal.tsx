@@ -10,7 +10,15 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
+
+import {
+    InputOTP,
+    InputOTPGroup,
+    InputOTPSeparator,
+    InputOTPSlot,
+} from "@/components/ui/input-otp";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,11 +26,16 @@ import { useState } from "react";
 const PassKeyModal = () => {
     const router = useRouter();
     const [open, setOpen] = useState(true);
+    const [passKey, setPassKey] = useState('');
+    const [error, setError] = useState('');
+
+    const validatePasskey = (e) => {};
 
     const closeModal = () => {
         setOpen(false);
         router.push('/')
     };
+
 
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
@@ -45,11 +58,26 @@ const PassKeyModal = () => {
                 </AlertDialogHeader>
 
                 <div>
-                    
+                    <InputOTP maxLength={6} value={passKey} onChange={(value) => setPassKey(value)}>
+                        <InputOTPGroup className='shad-otp'>
+                            <InputOTPSlot className='shad-otp-slot' index={0} />
+                            <InputOTPSlot className='shad-otp-slot' index={1} />
+                            <InputOTPSlot className='shad-otp-slot' index={2} />
+                            <InputOTPSlot className='shad-otp-slot' index={3} />
+                            <InputOTPSlot className='shad-otp-slot' index={4} />
+                            <InputOTPSlot className='shad-otp-slot' index={5} />
+                        </InputOTPGroup>
+                    </InputOTP>
+
+                    {error && <p className='shad-error text-14-regular mt-4 flex justify-center'>{error}</p>}
                 </div>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction>Continue</AlertDialogAction>
+                    <AlertDialogAction 
+                    onClick={(e) => validatePasskey(e)}
+                    className='shad-primary-btn w-full'
+                    >
+                        Enter Admin Passkey
+                    </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
