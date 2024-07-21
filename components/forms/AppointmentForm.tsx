@@ -44,7 +44,7 @@ const AppointmentForm = ({
     });
 
     const onSubmit = async (values: z.infer<typeof AppointmentFormValidation>) => {
-        console.log('About to submit: ', type)
+
         setIsLoading(true);
 
         let status;
@@ -63,7 +63,7 @@ const AppointmentForm = ({
                 status = 'pending'
                 break;
         }
-console.log('The type is: ', type)
+
         try {
             if (type === 'create' && patientId) {
                 const appointmentData = {
@@ -83,7 +83,7 @@ console.log('The type is: ', type)
                     router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`);
                 }
             } else {
-                console.log('Updating appointment')
+
                 const appointmentToUpdate = {
                     userId,
                     appointmentId: appointment?.$id!,
@@ -205,7 +205,9 @@ console.log('The type is: ', type)
                     />
                 )}
 
-                <SubmitButton isLoading={isLoading} className={`${type === 'cancel' ? 'shad-danger-btn' : 'shad-primary-btn'} w-full`}>{buttonLabel}</SubmitButton>
+                <SubmitButton isLoading={isLoading} className={`${type === 'cancel' ? 'shad-danger-btn' : 'shad-primary-btn'} w-full`}>
+                    {buttonLabel}
+                </SubmitButton>
             </form>
         </Form>
     )
