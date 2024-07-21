@@ -15,7 +15,7 @@ import AppointmentForm from "./forms/AppointmentForm";
 import { Appointment } from "@/types/appwrite.types";
 
 const AppointmentModal = ({
-    type, patientId, userId, appoitnment
+    type, patientId, userId, appointment
 }: {
     type: 'schedule' | 'cancel',
     patientId: string,
@@ -43,7 +43,7 @@ const AppointmentModal = ({
                     type={type}
                     patientId={patientId}
                     userId={userId}
-                    appointment={appoitnment}
+                    appointment={appointment}
                     setOpen={setOpen}
                 />
             </DialogContent>

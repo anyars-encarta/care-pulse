@@ -35,15 +35,16 @@ const AppointmentForm = ({
     const form = useForm<z.infer<typeof AppointmentFormValidation>>({
         resolver: zodResolver(AppointmentFormValidation),
         defaultValues: {
-            primaryPhysician: "",
-            schedule: new Date(),
-            reason: "",
-            note: "",
-            cancellationReason: ""
+            primaryPhysician: appointment ? appointment.primaryPhysician : '',
+            schedule: appointment ? new Date(appointment.schedule) : new Date(),
+            reason: appointment ? appointment.reason : '',
+            note: appointment ? appointment.note : '',
+            cancellationReason: appointment ? appointment.cancellationReason : ''
         },
     });
 
     const onSubmit = async (values: z.infer<typeof AppointmentFormValidation>) => {
+        console.log('About to submit: ', type)
         setIsLoading(true);
 
         let status;
@@ -62,7 +63,7 @@ const AppointmentForm = ({
                 status = 'pending'
                 break;
         }
-
+console.log('The type is: ', type)
         try {
             if (type === 'create' && patientId) {
                 const appointmentData = {
@@ -82,11 +83,12 @@ const AppointmentForm = ({
                     router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`);
                 }
             } else {
+                console.log('Updating appointment')
                 const appointmentToUpdate = {
                     userId,
                     appointmentId: appointment?.$id,
                     appointment: {
-                        primatyPhysician: values?.primaryPhysician,
+                        primaryPhysician: values?.primaryPhysician,
                         schedule: new Date(values?.schedule),
                         status: status as Status,
                         cancellationReason: values.cancellationReason,
