@@ -19,13 +19,13 @@ import { createAppointment, updateAppointment } from "@/lib/actions/appointment.
 import { Appointment } from "@/types/appwrite.types";
 
 const AppointmentForm = ({
-    type, userId, patientId, appointment, setOpen
+    type = 'create', userId, patientId, appointment, setOpen
 }: {
     userId: string;
     patientId: string;
     type: 'create' | 'cancel' | 'schedule';
-    appointment: Appointment;
-    setOpen: (open: boolean) => void;
+    appointment?: Appointment;
+    setOpen?: (open: boolean) => void;
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -36,10 +36,10 @@ const AppointmentForm = ({
         resolver: zodResolver(AppointmentFormValidation),
         defaultValues: {
             primaryPhysician: appointment ? appointment.primaryPhysician : '',
-            schedule: appointment ? new Date(appointment.schedule) : new Date(),
+            schedule: appointment ? new Date(appointment.schedule!) : new Date(Date.now()),
             reason: appointment ? appointment.reason : '',
-            note: appointment ? appointment.note : '',
-            cancellationReason: appointment ? appointment.cancellationReason : ''
+            note: appointment?.note || '',
+            cancellationReason: appointment?.cancellationReason || '',
         },
     });
 
@@ -86,14 +86,14 @@ console.log('The type is: ', type)
                 console.log('Updating appointment')
                 const appointmentToUpdate = {
                     userId,
-                    appointmentId: appointment?.$id,
+                    appointmentId: appointment?.$id!,
                     appointment: {
                         primaryPhysician: values?.primaryPhysician,
                         schedule: new Date(values?.schedule),
                         status: status as Status,
                         cancellationReason: values.cancellationReason,
                     },
-                    type
+                    type,
                 }
 
                 const updatedAppointment = await updateAppointment(appointmentToUpdate);
