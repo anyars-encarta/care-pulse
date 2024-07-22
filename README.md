@@ -39,7 +39,7 @@
 <!-- INTRO -->
 # 📖 CarePulse<a name="about-project"></a>
 
-> CarePulse ia healthcare management system that allows users to register and book appointments with doctors. Users receive SMS notification upon successful confirmation of their appointment. It was built with React, NextJS, Shadcn, and Appwrite.
+> CarePulse ia healthcare management system that allows users to register and book appointments with doctors. Users receive SMS notification upon successful confirmation of their appointment. It was built with React, NextJS, Shadcn, Tailwind CSS, and Appwrite.
 
 ## 🛠 Built With <a name="built-with"></a>
 1. React
