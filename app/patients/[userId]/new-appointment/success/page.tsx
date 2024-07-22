@@ -35,6 +35,7 @@ const Success = async ({ params: { userId }, searchParams }: SearchParamProps) =
                         height={300}
                         width={280}
                         alt='success'
+                        unoptimized
                     />
 
                     <h2 className='header mb-6 max-w-[600px] text-center'>
@@ -49,7 +50,7 @@ const Success = async ({ params: { userId }, searchParams }: SearchParamProps) =
 
                     <div className='flex items-center gap-3'>
                         <Image
-                            src={doctor?.image}
+                            src={doctor?.image!}
                             height={100}
                             width={100}
                             alt='doctor'
