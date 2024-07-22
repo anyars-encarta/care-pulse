@@ -44,7 +44,7 @@
 ## 🛠 Built With <a name="built-with"></a>
 1. React
 2. NextJS
-3. Shadcn
+3. Shadcn / Radix UI
 4. Appwrite
 5. Sentry
 6. Twilio
@@ -56,7 +56,7 @@
   <ul>
     <li><a href="https://reactjs.org/">React</a></li>
     <li><a href="https://nextjs.org/">NextJS</a></li>
-    <li><a href="https://ui.shadcn.com/">Shadcn</a></li>
+    <li><a href="https://ui.shadcn.com/">Shadcn / Radix UI</a></li>
     <li><a href="https://appwrite.io/">Appwrite</a></li>
     <li><a href="https://sentry.io/">Sentry</a></li>
     <li><a href="https://www.twilio.com/en-us">Twilio</a></li>
