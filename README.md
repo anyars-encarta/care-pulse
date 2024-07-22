@@ -45,9 +45,10 @@
 1. React
 2. NextJS
 3. Shadcn / Radix UI
-4. Appwrite
-5. Sentry
-6. Twilio
+4. Tailwind CSS
+5. Appwrite
+6. Sentry
+7. Twilio
 
 ### Tech Stack <a name="tech-stack"></a>
 
@@ -57,6 +58,7 @@
     <li><a href="https://reactjs.org/">React</a></li>
     <li><a href="https://nextjs.org/">NextJS</a></li>
     <li><a href="https://ui.shadcn.com/">Shadcn / Radix UI</a></li>
+    <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
     <li><a href="https://appwrite.io/">Appwrite</a></li>
     <li><a href="https://sentry.io/">Sentry</a></li>
     <li><a href="https://www.twilio.com/en-us">Twilio</a></li>
