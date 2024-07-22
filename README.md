@@ -154,6 +154,7 @@ You can deploy this project using:
 
 - [ ] **Patient - Doctor video call**
 - [ ] **Consultation Data Mangement**
+- [ ] **Register Doctors**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -188,7 +189,7 @@ Contributions, issues, and feature requests are welcome!
 
 - **What new features should be expected in the next release of the project?**
 
-  - I am currently working on patient - doctor video call feature, consultation data management.
+  - I am currently working on patient - doctor video call feature, consultation data management and doctor registration.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
