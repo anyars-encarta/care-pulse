@@ -79,7 +79,7 @@
 
 LIVE DEMO
 
-> Live page coming soon
+> View the [live](https://care-pulse-anyars.vercel.app/) page of the project here.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
