@@ -39,7 +39,7 @@
 <!-- INTRO -->
 # 📖 CarePulse<a name="about-project"></a>
 
-> CarePulse is healthcare system where patients register and book appointments with doctors, then receive SMS notification upon successful confirmation of their appointment. Built with React, NextJS, Shadcn, Tailwind CSS, and Appwrite. It has a pin enabled admin access that allows the admin access the booked appointments.
+> CarePulse is healthcare system where patients register and book appointments with doctors, then receive SMS notification upon successful confirmation of their appointment. Built with React, NextJS, Shadcn, Tailwind CSS, and Appwrite. It has a pin enabled admin access that allows the admin access the booked appointments. The admin could cancel or schedule the booked appointment.
 
 ## 🛠 Built With <a name="built-with"></a>
 1. React
